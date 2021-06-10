@@ -1,9 +1,9 @@
 namespace Ordering.Infrastructure.Seeders
 {
-
     using AutoBogus;
     using Ordering.Core.Entities;
     using Ordering.Infrastructure.Contexts;
+    using System;
     using System.Linq;
 
     public static class PatientSeeder
@@ -12,9 +12,19 @@ namespace Ordering.Infrastructure.Seeders
         {
             if (!context.Patients.Any())
             {
-                context.Patients.Add(new AutoFaker<Patient>());
-                context.Patients.Add(new AutoFaker<Patient>());
-                context.Patients.Add(new AutoFaker<Patient>());
+                foreach (int value in Enumerable.Range(1, 80))
+                {
+                    context.Patients.Add(new AutoFaker<Patient>()
+                        .RuleFor(fake => fake.Sex, fake => fake.Person.Gender.ToString())
+                        .RuleFor(fake => fake.FirstName, fake => fake.Person.FirstName)
+                        .RuleFor(fake => fake.LastName, fake => fake.Person.LastName)
+                        .RuleFor(fake => fake.Race, fake => null)
+                        .RuleFor(fake => fake.Ethnicity, fake => null)
+                        .RuleFor(fake => fake.InternalId, fake => fake.Random.Int(55748, 83927).ToString())
+                        .RuleFor(fake => fake.ExternalId, fake => fake.Random.Int(55748, 83927).ToString())
+                        .RuleFor(fake => fake.Dob, fake => fake.Date.PastOffset(new Random().Next(10, 50)))
+                    );
+                }
 
                 context.SaveChanges();
             }
