@@ -21,7 +21,7 @@ const fetchPatients = async ({pageNumber = 1, filter}) => {
 
     let res = await axios.get(`${patientsBaseUrl}?${queryParams}`, config);
     
-    pagination = JSON.parse(res.headers["x-pagination"]);
+    let pagination = JSON.parse(res.headers["x-pagination"]);
 
     let compiled = {
         ...res.data,

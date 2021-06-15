@@ -177,18 +177,18 @@ function humanDate(date){
             aria-label="Pagination"
           >
             {
-              patients.pagination && (
+              patients?.pagination && (
                 <div className="hidden sm:block">
                   <p className="text-sm text-gray-700">
-                    Showing <span className="font-medium">{patients.pagination.currentStartIndex}</span> to <span className="font-medium">{patients.pagination.currentEndIndex}</span> of{' '}
-                    <span className="font-medium">{patients.pagination.totalCount}</span> results
+                    Showing <span className="font-medium">{patients?.pagination.currentStartIndex}</span> to <span className="font-medium">{patients?.pagination.currentEndIndex}</span> of{' '}
+                    <span className="font-medium">{patients?.pagination.totalCount}</span> results
                   </p>
                 </div>
               )
             }
             <div className="flex-1 flex justify-between sm:justify-end">
               {
-                patients.pagination && patients.pagination.hasPrevious && (
+                patients?.pagination && patients?.pagination.hasPrevious && (
                   <button
                     onClick={() => setPageNumber(pageNumber - 1)}
                     className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
@@ -198,7 +198,7 @@ function humanDate(date){
                 )
               }
               {
-                patients.pagination && patients.pagination.hasNext && (
+                patients?.pagination && patients?.pagination.hasNext && (
                   <button
                     onClick={() => setPageNumber(pageNumber + 1)}
                     className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
