@@ -12,7 +12,7 @@ namespace Ordering.Infrastructure.Seeders
         {
             if (!context.Patients.Any())
             {
-                foreach (int value in Enumerable.Range(1, 80))
+                foreach (int value in Enumerable.Range(1, 10))
                 {
                     context.Patients.Add(new AutoFaker<Patient>()
                         .RuleFor(fake => fake.Sex, fake => fake.Person.Gender.ToString())
