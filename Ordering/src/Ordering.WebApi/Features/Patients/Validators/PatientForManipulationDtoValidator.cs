@@ -8,8 +8,8 @@ namespace Ordering.WebApi.Features.Patients.Validators
     {
         public PatientForManipulationDtoValidator()
         {
-            // add fluent validation rules that should be shared between creation and update operations here
-            //https://fluentvalidation.net/
+            RuleFor(p => p.FirstName).NotEmpty().WithMessage("Please specify a valid first name.");
+            //RuleFor(p => p.LastName).NotEmpty().WithMessage("Please specify a valid last name.");
         }
     }
 }
