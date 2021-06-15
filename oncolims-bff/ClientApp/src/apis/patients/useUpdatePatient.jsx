@@ -21,7 +21,7 @@ return useMutation(
         // return () => queryCache.setQueryData(['posts', values.id], oldPost)
       },
       onError: (error, values, rollback) => rollback(),
-      onSuccess: (data, variables) => {
+      onSuccess: (values) => {
         queryClient.invalidateQueries(patientKeys.lists)
         queryClient.invalidateQueries(patientKeys.detail(values.patientId))
       },

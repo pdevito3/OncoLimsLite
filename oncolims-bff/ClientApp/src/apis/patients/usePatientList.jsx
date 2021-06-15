@@ -12,7 +12,6 @@ const config = {
     headers: {}
 }
 
-export let pagination;
 const fetchPatients = async ({pageNumber = 1, filter}) => {
     let qp = encodeQueryParams(
         {pageSize: NumberParam, pageNumber: NumberParam, filters: StringParam}, 
@@ -22,10 +21,13 @@ const fetchPatients = async ({pageNumber = 1, filter}) => {
 
     let res = await axios.get(`${patientsBaseUrl}?${queryParams}`, config);
     
-    // TODO move pagination to DTO body in api to cache the data
     pagination = JSON.parse(res.headers["x-pagination"]);
 
-    return res.data;
+    let compiled = {
+        ...res.data,
+        pagination: {...pagination}
+    };
+    return compiled;
 }
 
 // TODO Update to infinite query to fetch next page automatically
