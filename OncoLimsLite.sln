@@ -7,43 +7,47 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{F2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C8048E85-4989-48AC-A130-79693C7C5E68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.WebApi", "Ordering\src\Ordering.WebApi\Ordering.WebApi.csproj", "{46301635-6C15-42ED-BCC2-7EB29C92D77C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.WebApi", "Ordering\src\Ordering.WebApi\Ordering.WebApi.csproj", "{46301635-6C15-42ED-BCC2-7EB29C92D77C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Core", "Ordering\src\Ordering.Core\Ordering.Core.csproj", "{48DA0204-B894-496F-B8A8-FA13D718C738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Core", "Ordering\src\Ordering.Core\Ordering.Core.csproj", "{48DA0204-B894-496F-B8A8-FA13D718C738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "Ordering\src\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{C6B0A27C-05CF-48BC-967C-A867BD1CEE68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.Infrastructure", "Ordering\src\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{C6B0A27C-05CF-48BC-967C-A867BD1CEE68}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A901ECCD-1083-410D-9DF5-CA35006CC5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.IntegrationTests", "Ordering\tests\Ordering.IntegrationTests\Ordering.IntegrationTests.csproj", "{21231E60-1FC2-4122-B05F-DE4F58F7DAD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.IntegrationTests", "Ordering\tests\Ordering.IntegrationTests\Ordering.IntegrationTests.csproj", "{21231E60-1FC2-4122-B05F-DE4F58F7DAD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.FunctionalTests", "Ordering\tests\Ordering.FunctionalTests\Ordering.FunctionalTests.csproj", "{13C98135-780D-4FFA-B134-69A5CE6687CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.FunctionalTests", "Ordering\tests\Ordering.FunctionalTests\Ordering.FunctionalTests.csproj", "{13C98135-780D-4FFA-B134-69A5CE6687CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.SharedTestHelpers", "Ordering\tests\Ordering.SharedTestHelpers\Ordering.SharedTestHelpers.csproj", "{A7AE96BB-19B7-4AD6-8AB5-AC4716901883}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.SharedTestHelpers", "Ordering\tests\Ordering.SharedTestHelpers\Ordering.SharedTestHelpers.csproj", "{A7AE96BB-19B7-4AD6-8AB5-AC4716901883}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.UnitTests", "Ordering\tests\Ordering.UnitTests\Ordering.UnitTests.csproj", "{DF1D7C9D-5AC4-4121-81AD-342C81A9532A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.UnitTests", "Ordering\tests\Ordering.UnitTests\Ordering.UnitTests.csproj", "{DF1D7C9D-5AC4-4121-81AD-342C81A9532A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{D482AB41-DE82-4DFC-B958-542067812CDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages", "Messages\Messages.csproj", "{D482AB41-DE82-4DFC-B958-542067812CDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SecureOrdering", "SecureOrdering", "{89E030C7-5D9D-4DE3-90D8-6EA24ECEB5C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3C75244-72C4-4671-9EAC-8D350D09535E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.WebApi", "SecureOrdering\src\SecureOrdering.WebApi\SecureOrdering.WebApi.csproj", "{CF002C4C-A867-40C4-8825-BC05AACF11C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.WebApi", "SecureOrdering\src\SecureOrdering.WebApi\SecureOrdering.WebApi.csproj", "{CF002C4C-A867-40C4-8825-BC05AACF11C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.Core", "SecureOrdering\src\SecureOrdering.Core\SecureOrdering.Core.csproj", "{A8CF4E30-D538-43EA-A968-033999FB4D02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.Core", "SecureOrdering\src\SecureOrdering.Core\SecureOrdering.Core.csproj", "{A8CF4E30-D538-43EA-A968-033999FB4D02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.Infrastructure", "SecureOrdering\src\SecureOrdering.Infrastructure\SecureOrdering.Infrastructure.csproj", "{A5278A7B-1302-42B3-BCD4-73230E7C8E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.Infrastructure", "SecureOrdering\src\SecureOrdering.Infrastructure\SecureOrdering.Infrastructure.csproj", "{A5278A7B-1302-42B3-BCD4-73230E7C8E18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8BA128A5-FA2D-4B78-B581-D4A0E5B79A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.IntegrationTests", "SecureOrdering\tests\SecureOrdering.IntegrationTests\SecureOrdering.IntegrationTests.csproj", "{D785222B-F3ED-451E-9E8E-07390D01ADB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.IntegrationTests", "SecureOrdering\tests\SecureOrdering.IntegrationTests\SecureOrdering.IntegrationTests.csproj", "{D785222B-F3ED-451E-9E8E-07390D01ADB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.FunctionalTests", "SecureOrdering\tests\SecureOrdering.FunctionalTests\SecureOrdering.FunctionalTests.csproj", "{040ADE59-2548-44B0-830F-AC2384439888}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.FunctionalTests", "SecureOrdering\tests\SecureOrdering.FunctionalTests\SecureOrdering.FunctionalTests.csproj", "{040ADE59-2548-44B0-830F-AC2384439888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.SharedTestHelpers", "SecureOrdering\tests\SecureOrdering.SharedTestHelpers\SecureOrdering.SharedTestHelpers.csproj", "{CED762E3-9A49-47D2-BC2F-2E08612CABB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.SharedTestHelpers", "SecureOrdering\tests\SecureOrdering.SharedTestHelpers\SecureOrdering.SharedTestHelpers.csproj", "{CED762E3-9A49-47D2-BC2F-2E08612CABB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureOrdering.UnitTests", "SecureOrdering\tests\SecureOrdering.UnitTests\SecureOrdering.UnitTests.csproj", "{5049FD48-A65A-4459-904D-3F201BB739E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureOrdering.UnitTests", "SecureOrdering\tests\SecureOrdering.UnitTests\SecureOrdering.UnitTests.csproj", "{5049FD48-A65A-4459-904D-3F201BB739E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "oncolims-bff", "oncolims-bff\oncolims-bff.csproj", "{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bff", "Bff", "{2AE6F611-9025-48DB-BFA1-64867C68B28B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,9 +57,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{46301635-6C15-42ED-BCC2-7EB29C92D77C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -238,6 +239,21 @@ Global
 		{5049FD48-A65A-4459-904D-3F201BB739E7}.Release|x64.Build.0 = Release|Any CPU
 		{5049FD48-A65A-4459-904D-3F201BB739E7}.Release|x86.ActiveCfg = Release|Any CPU
 		{5049FD48-A65A-4459-904D-3F201BB739E7}.Release|x86.Build.0 = Release|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Release|x64.Build.0 = Release|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C8048E85-4989-48AC-A130-79693C7C5E68} = {F2A02717-02BD-4DA1-A2FE-007D82CFF719}
@@ -258,5 +274,9 @@ Global
 		{040ADE59-2548-44B0-830F-AC2384439888} = {8BA128A5-FA2D-4B78-B581-D4A0E5B79A78}
 		{CED762E3-9A49-47D2-BC2F-2E08612CABB3} = {8BA128A5-FA2D-4B78-B581-D4A0E5B79A78}
 		{5049FD48-A65A-4459-904D-3F201BB739E7} = {8BA128A5-FA2D-4B78-B581-D4A0E5B79A78}
+		{FE5E1CF2-1021-4C18-9F51-3A2C02F2779D} = {2AE6F611-9025-48DB-BFA1-64867C68B28B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1768815B-896E-4072-8767-1C0AFE2622FA}
 	EndGlobalSection
 EndGlobal
