@@ -15,6 +15,8 @@ return useQuery(
     patientKeys.detail(patientId),
     async () => fetchPatient(patientId),
     {
+      staleTime: Infinity,
+      cacheTime: Infinity,
       enabled: false // prevents it from running by default when it will be null
     }
 )}

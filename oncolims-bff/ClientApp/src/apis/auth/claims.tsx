@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 
 const claimsKeys = {
-  claim: ['claim']
+  claim: ['claims']
   // claims: ['claims'],
   // claims: (id) => [...claimsKeys.claims, id]
 }
