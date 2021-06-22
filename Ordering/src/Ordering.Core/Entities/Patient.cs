@@ -8,6 +8,8 @@ namespace Ordering.Core.Entities
     [Table("Patient")]
     public class Patient
     {
+        private string _sex;
+
         [Key]
         [Required]
         [Sieve(CanFilter = true, CanSort = true)]
@@ -29,7 +31,19 @@ namespace Ordering.Core.Entities
         public DateTimeOffset? Dob { get; set; }
 
         [Sieve(CanFilter = true, CanSort = true)]
-        public string Sex { get; set; }
+        public string Sex
+        {
+            get => _sex;
+            set
+            {
+                if (value.Equals("Male", StringComparison.InvariantCultureIgnoreCase) || value.Equals("M", StringComparison.InvariantCultureIgnoreCase))
+                    _sex = "Male";
+                else if (value.Equals("Female", StringComparison.InvariantCultureIgnoreCase) || value.Equals("F", StringComparison.InvariantCultureIgnoreCase))
+                    _sex = "Female";
+                else
+                    _sex = "Unknown";
+            }
+        }
 
         [Sieve(CanFilter = true, CanSort = true)]
         public string Gender { get; set; }
