@@ -3,6 +3,7 @@ import { FormLabel, TextInput } from '../Common/FormControls'
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { DevTool } from '@hookform/devtools';
 
 const defaultFormValues = {
   username: '',
@@ -100,6 +101,7 @@ function Login() {
           </div>
         </form>
       </div>
+      <DevTool control={control} placement={"top-left"} />
     </div>
   );
 }

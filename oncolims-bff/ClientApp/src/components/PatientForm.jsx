@@ -53,7 +53,7 @@ function PatientForm({
   
   return (
     <div>    
-      {/* <DevTool control={control} placement={"top-right"} />    */}
+      {/* <DevTool control={control} placement={"top-right"} className="absolute top-0 right-0" />    */}
       <div>
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -93,19 +93,19 @@ function PatientForm({
           </form>
         </div>
         
-        <div className="mt-5 sm:mt-6 space-y-2">
-          <span className="flex w-full rounded-md shadow-sm">
-            <button onClick={handleSubmit(internalHandleSubmit)} type="submit" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-emerald-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-              {submitText}              
-            </button>
-          </span>
+      <div className="mt-5 sm:mt-6 space-y-2">
+        <span className="flex w-full rounded-md shadow-sm">
+          <button onClick={handleSubmit(internalHandleSubmit)} type="submit" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-emerald-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            {submitText}              
+          </button>
+        </span>
 
-          <span className="flex w-full rounded-md shadow-sm">
-            <button onClick={() => setIsOpen(false)} type="button" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-white text-base leading-6 font-medium text-gray-500 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-              Cancel
-            </button>
-          </span>
-        </div>
+        <span className="flex w-full rounded-md shadow-sm">
+          <button onClick={() => setIsOpen(false)} type="button" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-white text-base leading-6 font-medium text-gray-500 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            Cancel
+          </button>
+        </span>
+      </div>
     </div>
   )
 }
