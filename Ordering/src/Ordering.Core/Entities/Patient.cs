@@ -36,7 +36,9 @@ namespace Ordering.Core.Entities
             get => _sex;
             set
             {
-                if (value.Equals("Male", StringComparison.InvariantCultureIgnoreCase) || value.Equals("M", StringComparison.InvariantCultureIgnoreCase))
+                if (value == null)
+                    _sex = "Unknown";
+                else if (value.Equals("Male", StringComparison.InvariantCultureIgnoreCase) || value.Equals("M", StringComparison.InvariantCultureIgnoreCase))
                     _sex = "Male";
                 else if (value.Equals("Female", StringComparison.InvariantCultureIgnoreCase) || value.Equals("F", StringComparison.InvariantCultureIgnoreCase))
                     _sex = "Female";
