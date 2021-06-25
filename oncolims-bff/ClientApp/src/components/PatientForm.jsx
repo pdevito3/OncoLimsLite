@@ -68,12 +68,26 @@ function PatientForm({
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <FormLabel text="First Name" fieldName="firstName" />
               <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <TextInput fieldName="firstName" value={values.firstName} formFieldErrors={errors.firstName} autocomplete="given-name" register={register} setValue={setValue} />
+                <TextInput 
+                  fieldName="firstName" 
+                  value={values.firstName} 
+                  errors={errors.firstName} 
+                  autocomplete="given-name" 
+                  register={register} 
+                  onChange={(e) => setValue("firstName", e.target.value)}
+                />
               </div>
 
               <FormLabel text="Last Name" fieldName="lastName" />
               <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <TextInput fieldName="lastName" value={values.lastName} formFieldErrors={errors.lastName} autocomplete="given-name" register={register} setValue={setValue} />
+                <TextInput 
+                  fieldName="lastName" 
+                  value={values.lastName} 
+                  errors={errors.lastName} 
+                  autocomplete="given-name" 
+                  register={register} 
+                  onChange={(e) => setValue("lastName", e.target.value)}
+                />
               </div>
             </div>
           </form>

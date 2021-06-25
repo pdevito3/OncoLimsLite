@@ -4,6 +4,7 @@ import useClaim from '../../apis/auth/claims'
 import { UseQueryResult } from 'react-query'
 import restricted from '../../Images/safe.png'
 import Avatar, { genConfig, AvatarConfig } from 'react-nice-avatar'
+import Login from '../Pages/Login'
 
 function Layout({children}: SidebarProps) {
 
@@ -21,6 +22,8 @@ function Layout({children}: SidebarProps) {
   }, [name])
 
   return (    
+    <>
+    {name ? 
     <div className="h-screen flex overflow-hidden bg-gray-50">
       <Sidebar>
         <ProfileFooter>
@@ -60,19 +63,23 @@ function Layout({children}: SidebarProps) {
       </Sidebar>
 
       <SidebarContent>
-        {name ? 
           <div className="py-6">
             <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
               {children} 
             </div>
           </div>
-        : (
-          <div className="flex flex-1 max-w-2xl mx-auto">
-            <img src={restricted} alt="unauthorized" className="object-cover" />
-          </div>
-        )}
+
       </SidebarContent>
     </div>
+    : (
+      <>
+        {/* <div className="flex flex-1 max-w-2xl mx-auto">
+          <img src={restricted} alt="unauthorized" className="object-cover" />
+        </div> */}
+        <Login/>
+      </>
+    )}
+    </>
   )
 }
 
