@@ -7,6 +7,8 @@ import { TextInput } from './Common/FormControls/TextInput'
 import { FormLabel } from './Common/FormControls/FormLabel'
 import {Listbox} from './Common/FormControls/Listbox';
 
+
+
 let defaultFormValues = {
   firstName: '',
   lastName: '',
@@ -24,19 +26,14 @@ function PatientForm({
   initialValues = defaultFormValues,
   submitText,
   clearOnSubmit,
-  setIsOpen,
+  onClose,
   resetMutation
 }) {  
-  const {
-    register,
-    handleSubmit,
-    control,
+  const { register,handleSubmit,control,
     formState: { errors },
     reset
-  } = useForm({
-    resolver: yupResolver(patientSchema),
-    mode: "onChange"
-  });
+  } = useForm({ resolver: yupResolver(patientSchema), mode: "onChange" });
+
   const [values, setValues] = React.useState(initialValues)
   const setValue = (field, value) =>
     setValues((old) => ({ ...old, [field]: value }))
@@ -55,10 +52,8 @@ function PatientForm({
     setValues(initialValues)
   }, [initialValues])
 
-  console.log(initialValues)
-
   const sexes = [
-    { id: null, text: null },
+    // { id: null, text: null },
     { id: "Female", text: 'Female' },
     { id: "Male", text: 'Male' },
     { id: "Unknown", text: 'Unknown' },
@@ -66,7 +61,7 @@ function PatientForm({
 
   return (
     <div>    
-      <DevTool control={control} placement={"top-right"} className="absolute top-0 right-0" />   
+      {/* <DevTool control={control} placement={"top-right"} className="absolute top-0 right-0" />    */}
       <div>
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -113,6 +108,7 @@ function PatientForm({
                   onChange={(value) => setValue("sex", value)}
                   data={sexes}
                 />
+                
               </div>
             </div>
           </form>
@@ -126,7 +122,7 @@ function PatientForm({
         </span>
 
         <span className="flex w-full rounded-md shadow-sm">
-          <button onClick={() => setIsOpen(false)} type="button" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-white text-base leading-6 font-medium text-gray-500 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+          <button onClick={onClose} type="button" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-white text-base leading-6 font-medium text-gray-500 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
             Cancel
           </button>
         </span>

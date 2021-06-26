@@ -23,9 +23,7 @@ function Patients() {
   const {data: patientRecord, isSuccess: patientRecordIsSuccess, isLoading: patientRecordIsLoading, refetch: refetchPatientRecord } = usePatient(patientIdToEdit);
   const createPatient = useCreatePatient();  
   const updatePatient = useUpdatePatient();  
-  const deletePatient = useDeletePatient();  
-
-  // console.log({patientRecord})
+  const deletePatient = useDeletePatient();
 
   //TODO Change modal open to XSTATE
   let [addModalIsOpen, setAddModalIsOpen] = useState(false);
@@ -40,25 +38,31 @@ function Patients() {
     if(patientIdToEdit !== null && patientIdToEdit !== undefined) {
       refetchPatientRecord(patientIdToEdit);
     }
-  }, patientIdToEdit)
+  }, [patientIdToEdit])
 
-const submitFilter = useCallback(
-  (filter) => {
-    if(filter?.length <= 0){
-      setFilter(undefined) // clears queryparam
-    }
-    
-    setPageNumber(1) // resets page number
-  },
-  [filter, pageNumber],
-)
+  const submitFilter = useCallback(
+    (filter) => {
+      if(filter?.length <= 0){
+        setFilter(undefined) // clears queryparam
+      }
+      
+      setPageNumber(1) // resets page number
+    },
+    [filter, pageNumber],
+  )
 
-function humanDate(date){
-  if(date === null || !dayjs(date).isValid)
-    return null
+  function humanDate(date){
+    if(date === null || !dayjs(date).isValid)
+      return null
 
-  return dayjs(date).format("MMM DD, YYYY")
-}
+    return dayjs(date).format("MMM DD, YYYY")
+  }
+
+  useEffect(() => {
+    if(!updateModalIsOpen)
+      setPatientIdToEdit(null)
+
+  }, [updateModalIsOpen])
 
   return (
     <>
@@ -233,7 +237,7 @@ function humanDate(date){
               }
             />
           </Dialog>
-              
+        
           {
             patientRecordIsLoading ? (
               <span>Loading...</span>
@@ -244,7 +248,7 @@ function humanDate(date){
                 resetMutation={updatePatient.reset}
                 clearOnSubmit
                 initialValues={patientRecord?.data}
-                setIsOpen={setUpdateModalIsOpen}
+                onClose={() => {setUpdateModalIsOpen(false);}}
                 submitText={
                   updatePatient.isLoading
                     ? 'Saving...'

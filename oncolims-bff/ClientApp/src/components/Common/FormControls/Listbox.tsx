@@ -10,24 +10,23 @@ interface ListboxProps {
   errors: DeepMap<FieldValues, FieldError>;
   control: Control<FieldValues>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
   data: { id: string | null | undefined, text: string | null | undefined }[];
 }
 
-function Listbox({fieldName, value, errors, control, onChange, className, data}: ListboxProps) {
-  const definedValue = value === undefined ? null : value;
-  console.log({definedValue})
+function Listbox({fieldName, value, errors, control, onChange, data}: ListboxProps) {  
   return (
     <Controller 
       name={fieldName}
       control={control}
-      defaultValue={definedValue}
-      render={({field}) => 
-        <MySelect
+      render={({field}) => {
+        field.value = value;
+
+        return (<MySelect
           data={data}
           field={{...field}}
           onChange={onChange}
-        /> 
+        /> )
+      }
     }/>
   )
 }
@@ -57,7 +56,7 @@ function MySelect({ data, field, onChange }: MySelectProps){
                 )
               }
             >
-              <span className="block truncate">{selected}</span>
+              <span className="block truncate">{selected?.text ?? selected}</span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </span>
