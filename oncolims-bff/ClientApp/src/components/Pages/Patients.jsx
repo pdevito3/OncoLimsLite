@@ -25,6 +25,8 @@ function Patients() {
   const updatePatient = useUpdatePatient();  
   const deletePatient = useDeletePatient();  
 
+  // console.log({patientRecord})
+
   //TODO Change modal open to XSTATE
   let [addModalIsOpen, setAddModalIsOpen] = useState(false);
   let [updateModalIsOpen, setUpdateModalIsOpen] = useState(false);
@@ -133,6 +135,9 @@ function humanDate(date){
                           DOB
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Sex
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Internal Id
                         </th>
                       </tr>
@@ -161,6 +166,7 @@ function humanDate(date){
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{patient.firstName}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.lastName}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{humanDate(patient.dob)}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.sex}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.internalId}</td>
                         </tr>
                       ))}

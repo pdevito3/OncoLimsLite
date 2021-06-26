@@ -3,16 +3,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { DevTool } from "@hookform/devtools";
-import { FormLabel, TextInput } from '../components/Common/FormControls'
+import { TextInput } from './Common/FormControls/TextInput'
+import { FormLabel } from './Common/FormControls/FormLabel'
+import {Listbox} from './Common/FormControls/Listbox';
 
-const defaultFormValues = {
+let defaultFormValues = {
   firstName: '',
-  lastName: ''
+  lastName: '',
+  sex: ''
 }
 
 const patientSchema = yup.object().shape({
   firstName: yup.string().required().label('First name'),
-  lastName: yup.string().label('Last name')
+  lastName: yup.string().label('Last name'),
+  sex: yup.string().label('Sex').nullable(true),
 });
 
 function PatientForm({
@@ -41,7 +45,7 @@ function PatientForm({
     if (clearOnSubmit) {
       setValues(defaultFormValues)
     }
-
+    
     await onSubmit(values)
     reset()
     window.setTimeout(() => resetMutation(), 1500)
@@ -50,10 +54,19 @@ function PatientForm({
   React.useEffect(() => {
     setValues(initialValues)
   }, [initialValues])
-  
+
+  console.log(initialValues)
+
+  const sexes = [
+    { id: null, text: null },
+    { id: "Female", text: 'Female' },
+    { id: "Male", text: 'Male' },
+    { id: "Unknown", text: 'Unknown' },
+  ]
+
   return (
     <div>    
-      {/* <DevTool control={control} placement={"top-right"} className="absolute top-0 right-0" />    */}
+      <DevTool control={control} placement={"top-right"} className="absolute top-0 right-0" />   
       <div>
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -87,6 +100,18 @@ function PatientForm({
                   autocomplete="given-name" 
                   register={register} 
                   onChange={(e) => setValue("lastName", e.target.value)}
+                />
+              </div>
+
+              <FormLabel text="Sex" fieldName="sex" />
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <Listbox 
+                  fieldName="sex" 
+                  value={values.sex} 
+                  errors={errors.sex} 
+                  control={control} 
+                  onChange={(value) => setValue("sex", value)}
+                  data={sexes}
                 />
               </div>
             </div>

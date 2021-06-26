@@ -25,5 +25,10 @@ return useMutation(
         queryClient.invalidateQueries(patientKeys.lists)
         queryClient.invalidateQueries(patientKeys.detail(values.patientId))
       },
+      // KCD did an on settled like this 
+      // onSettled: () => {
+      //   queryClient.invalidateQueries(patientKeys.lists)
+      //   queryClient.invalidateQueries(patientKeys.detail(values.patientId))
+      // },
     }
 )}

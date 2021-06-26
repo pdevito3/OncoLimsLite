@@ -5,11 +5,6 @@ import voca from 'voca';
 import { FieldValues, UseFormRegister, DeepMap, FieldError } from 'react-hook-form';
 import classnames from 'classnames'
 
-interface FormLabelProps {
-  fieldName: string;
-  text: string;
-  className?: string;
-}
 
 interface TextInputProps {
   fieldName: string;
@@ -22,19 +17,9 @@ interface TextInputProps {
   className?: string;
 }
 
-function FormLabel({fieldName , text, className}: FormLabelProps){
-  let fieldKebab = voca.kebabCase(fieldName);
-
-  return (
-    <label htmlFor={fieldKebab} className={classnames(`block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2`, className)}>
-      {text}
-    </label>
-  )
-}
 
 function TextInput({fieldName, value, errors, autocomplete = undefined, register, onChange, type = "text", className}: TextInputProps) {
   let fieldKebab = voca.kebabCase(fieldName);
-
   return (
     <>
       <div className={classnames("relative", className)}>
@@ -64,4 +49,4 @@ function TextInput({fieldName, value, errors, autocomplete = undefined, register
   )
 }
 
-export { FormLabel, TextInput }
+export { TextInput }
