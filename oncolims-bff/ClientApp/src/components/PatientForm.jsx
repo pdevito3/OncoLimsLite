@@ -48,7 +48,7 @@ function PatientForm({
     window.setTimeout(() => resetMutation(), 1500)
   }
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setValues(initialValues)
   }, [initialValues])
 
@@ -107,8 +107,7 @@ function PatientForm({
                   control={control} 
                   onChange={(value) => setValue("sex", value)}
                   data={sexes}
-                />
-                
+                />                
               </div>
             </div>
           </form>

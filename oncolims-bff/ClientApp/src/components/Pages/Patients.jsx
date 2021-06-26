@@ -220,12 +220,12 @@ function Patients() {
             </div>
           </nav>
         
-          <Dialog isOpen={addModalIsOpen} setIsOpen={setAddModalIsOpen}>
+          <Dialog isOpen={addModalIsOpen} onClose={setAddModalIsOpen}>
             <PatientForm 
               onSubmit={createPatient.mutate}
               resetMutation={createPatient.reset}
               clearOnSubmit
-              setIsOpen={setAddModalIsOpen}
+              onClose={() => setAddModalIsOpen(false)}
               submitText={
                 createPatient.isLoading
                   ? 'Saving...'
@@ -238,30 +238,24 @@ function Patients() {
             />
           </Dialog>
         
-          {
-            patientRecordIsLoading ? (
-              <span>Loading...</span>
-            ) : (
-              <Dialog isOpen={updateModalIsOpen} setIsOpen={setUpdateModalIsOpen}>
-              <PatientForm 
-                onSubmit={updatePatient.mutate}
-                resetMutation={updatePatient.reset}
-                clearOnSubmit
-                initialValues={patientRecord?.data}
-                onClose={() => {setUpdateModalIsOpen(false);}}
-                submitText={
-                  updatePatient.isLoading
-                    ? 'Saving...'
-                    : updatePatient.isError
-                    ? 'Error!'
-                    : updatePatient.isSuccess
-                    ? 'Saved!'
-                    : 'Update Patient'
-                }
-              />            
-            </Dialog>
-            )
-          }
+          <Dialog isOpen={updateModalIsOpen} onClose={setUpdateModalIsOpen}>
+            <PatientForm 
+              onSubmit={updatePatient.mutate}
+              resetMutation={updatePatient.reset}
+              clearOnSubmit
+              initialValues={patientRecord?.data}
+              onClose={() => setUpdateModalIsOpen(false)}
+              submitText={
+                updatePatient.isLoading
+                  ? 'Saving...'
+                  : updatePatient.isError
+                  ? 'Error!'
+                  : updatePatient.isSuccess
+                  ? 'Saved!'
+                  : 'Update Patient'
+              }
+            />            
+          </Dialog>
         </div>
       }
     </>
