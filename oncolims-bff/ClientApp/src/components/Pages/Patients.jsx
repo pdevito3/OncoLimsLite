@@ -150,7 +150,7 @@ function Patients() {
                       {patients.data.map((patient) => (
                         <tr key={patient.patientId} className="group bg-white even:bg-gray-50">
                           <td className="py-4 whitespace-nowrap text-left text-sm font-medium flex items-center justify-center">
-                            <div className="flex space-x-2">
+                            <div className="flex space-x-3">
                               <button 
                                 onClick={() => editPatient(patient.patientId)}
                                 className="hidden text-emerald-600 hover:text-emerald-900 group-hover:block transition duration-100 ease-in"
