@@ -23,7 +23,7 @@ function Patients() {
   const {data: patientRecord, isSuccess: patientRecordIsSuccess, isLoading: patientRecordIsLoading, refetch: refetchPatientRecord } = usePatient(patientIdToEdit);
   const createPatient = useCreatePatient();  
   const updatePatient = useUpdatePatient();  
-  const deletePatient = useDeletePatient();  
+  const deletePatient = useDeletePatient();
 
   //TODO Change modal open to XSTATE
   let [addModalIsOpen, setAddModalIsOpen] = useState(false);
@@ -38,25 +38,31 @@ function Patients() {
     if(patientIdToEdit !== null && patientIdToEdit !== undefined) {
       refetchPatientRecord(patientIdToEdit);
     }
-  }, patientIdToEdit)
+  }, [patientIdToEdit])
 
-const submitFilter = useCallback(
-  (filter) => {
-    if(filter?.length <= 0){
-      setFilter(undefined) // clears queryparam
-    }
-    
-    setPageNumber(1) // resets page number
-  },
-  [filter, pageNumber],
-)
+  const submitFilter = useCallback(
+    (filter) => {
+      if(filter?.length <= 0){
+        setFilter(undefined) // clears queryparam
+      }
+      
+      setPageNumber(1) // resets page number
+    },
+    [filter, pageNumber],
+  )
 
-function humanDate(date){
-  if(date === null || !dayjs(date).isValid)
-    return null
+  function humanDate(date){
+    if(date === null || !dayjs(date).isValid)
+      return null
 
-  return dayjs(date).format("MMM DD, YYYY")
-}
+    return dayjs(date).format("MMM DD, YYYY")
+  }
+
+  useEffect(() => {
+    if(!updateModalIsOpen)
+      setPatientIdToEdit(null)
+
+  }, [updateModalIsOpen])
 
   return (
     <>
@@ -133,6 +139,9 @@ function humanDate(date){
                           DOB
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Sex
+                        </th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Internal Id
                         </th>
                       </tr>
@@ -141,7 +150,7 @@ function humanDate(date){
                       {patients.data.map((patient) => (
                         <tr key={patient.patientId} className="group bg-white even:bg-gray-50">
                           <td className="py-4 whitespace-nowrap text-left text-sm font-medium flex items-center justify-center">
-                            <div className="flex space-x-2">
+                            <div className="flex space-x-3">
                               <button 
                                 onClick={() => editPatient(patient.patientId)}
                                 className="hidden text-emerald-600 hover:text-emerald-900 group-hover:block transition duration-100 ease-in"
@@ -161,6 +170,7 @@ function humanDate(date){
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{patient.firstName}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.lastName}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{humanDate(patient.dob)}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.sex}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{patient.internalId}</td>
                         </tr>
                       ))}
@@ -210,12 +220,12 @@ function humanDate(date){
             </div>
           </nav>
         
-          <Dialog isOpen={addModalIsOpen} setIsOpen={setAddModalIsOpen}>
+          <Dialog isOpen={addModalIsOpen} onClose={setAddModalIsOpen}>
             <PatientForm 
               onSubmit={createPatient.mutate}
               resetMutation={createPatient.reset}
               clearOnSubmit
-              setIsOpen={setAddModalIsOpen}
+              onClose={() => setAddModalIsOpen(false)}
               submitText={
                 createPatient.isLoading
                   ? 'Saving...'
@@ -227,31 +237,25 @@ function humanDate(date){
               }
             />
           </Dialog>
-              
-          {
-            patientRecordIsLoading ? (
-              <span>Loading...</span>
-            ) : (
-              <Dialog isOpen={updateModalIsOpen} setIsOpen={setUpdateModalIsOpen}>
-              <PatientForm 
-                onSubmit={updatePatient.mutate}
-                resetMutation={updatePatient.reset}
-                clearOnSubmit
-                initialValues={patientRecord?.data}
-                setIsOpen={setUpdateModalIsOpen}
-                submitText={
-                  updatePatient.isLoading
-                    ? 'Saving...'
-                    : updatePatient.isError
-                    ? 'Error!'
-                    : updatePatient.isSuccess
-                    ? 'Saved!'
-                    : 'Update Patient'
-                }
-              />            
-            </Dialog>
-            )
-          }
+        
+          <Dialog isOpen={updateModalIsOpen} onClose={setUpdateModalIsOpen}>
+            <PatientForm 
+              onSubmit={updatePatient.mutate}
+              resetMutation={updatePatient.reset}
+              clearOnSubmit
+              initialValues={patientRecord?.data}
+              onClose={() => setUpdateModalIsOpen(false)}
+              submitText={
+                updatePatient.isLoading
+                  ? 'Saving...'
+                  : updatePatient.isError
+                  ? 'Error!'
+                  : updatePatient.isSuccess
+                  ? 'Saved!'
+                  : 'Update Patient'
+              }
+            />            
+          </Dialog>
         </div>
       }
     </>

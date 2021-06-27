@@ -9,10 +9,9 @@ import Login from '../Pages/Login'
 function Layout({children}: SidebarProps) {
 
   // TODO abstract out auth
-  const claims = useClaim();
-  let data = claims?.data;
-  let logoutUrl = data?.find(claim => claim.type === 'bff:logout_url') 
-  let nameDict = data?.find(claim => claim.type === 'name') ||  data?.find(claim => claim.type === 'sub');
+  const { data: claims, isLoading } = useClaim();
+  let logoutUrl = claims?.find(claim => claim.type === 'bff:logout_url') 
+  let nameDict = claims?.find(claim => claim.type === 'name') ||  claims?.find(claim => claim.type === 'sub');
   let name = nameDict?.value;
 
   const [avatarConfig, setAvatarConfig] = React.useState(null)
@@ -30,7 +29,7 @@ function Layout({children}: SidebarProps) {
           {
             !name ? (
               <a 
-              href="/bff/login?returnUrl=/"
+                href="/bff/login?returnUrl=/"
                 className="w-full inline-block bg-emerald-500 py-2 px-4 border border-transparent rounded-md text-base text-center font-medium text-white hover:bg-opacity-75"
               >
                 Login
@@ -76,7 +75,8 @@ function Layout({children}: SidebarProps) {
         {/* <div className="flex flex-1 max-w-2xl mx-auto">
           <img src={restricted} alt="unauthorized" className="object-cover" />
         </div> */}
-        <Login/>
+        {isLoading ? <div>Is Loading...</div> :
+        <Login/>}
       </>
     )}
     </>
@@ -84,7 +84,6 @@ function Layout({children}: SidebarProps) {
 }
 
 function GetRandomAvatarConfigForFun(name: string | undefined, ) {
-  console.log(name)
   const random = (items: string[]) => items[Math.floor(Math.random()*items.length)];
   const calculatedSex = name === "Bob Smith" ? 'man' : 'woman'
   const earSize = ['small', 'big']

@@ -1,5 +1,6 @@
 import React from 'react'
-import { FormLabel, TextInput } from '../Common/FormControls'
+import { TextInput } from '../Common/FormControls/TextInput'
+import { FormLabel } from '../Common/FormControls/FormLabel'
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
