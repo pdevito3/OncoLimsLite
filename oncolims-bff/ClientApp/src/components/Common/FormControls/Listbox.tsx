@@ -119,7 +119,7 @@ function MySelect({ data, field, onChange, errors, fieldName }: MySelectProps){
                 ))}
               </HeadlessListbox.Options>
             </Transition>
-            {errors && <p id={`${fieldKebab}-error`} role="alert" className="mt-1 text-red-600 font-medium text-sm">{"test"}</p>}
+            {errors && <p id={`${fieldKebab}-error`} role="alert" className="mt-1 text-red-600 font-medium text-sm">{errors?.message}</p>}
           </div>
         </>
       )}
