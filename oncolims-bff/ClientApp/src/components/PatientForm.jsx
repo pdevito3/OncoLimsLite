@@ -7,12 +7,16 @@ import { TextInput } from './Common/FormControls/TextInput'
 import { FormLabel } from './Common/FormControls/FormLabel'
 import {Listbox} from './Common/FormControls/Listbox';
 
-
+const sexes = [
+  { id: "Female", text: 'Female' },
+  { id: "Male", text: 'Male' },
+  { id: "Unknown", text: 'Unknown' },
+]
 
 let defaultFormValues = {
   firstName: '',
   lastName: '',
-  sex: ''
+  sex: 'Unknown'
 }
 
 const patientSchema = yup.object().shape({
@@ -38,6 +42,11 @@ function PatientForm({
   const setValue = (field, value) =>
     setValues((old) => ({ ...old, [field]: value }))
 
+  React.useLayoutEffect(() => {
+    // timeout to account for transition of modal
+    window.setTimeout(() => setValues(initialValues), 500)
+  }, [initialValues])
+
   const internalHandleSubmit = async (e) => {
     if (clearOnSubmit) {
       setValues(defaultFormValues)
@@ -47,17 +56,6 @@ function PatientForm({
     reset()
     window.setTimeout(() => resetMutation(), 1500)
   }
-
-  React.useLayoutEffect(() => {
-    setValues(initialValues)
-  }, [initialValues])
-
-  const sexes = [
-    // { id: null, text: null },
-    { id: "Female", text: 'Female' },
-    { id: "Male", text: 'Male' },
-    { id: "Unknown", text: 'Unknown' },
-  ]
 
   return (
     <div>    
