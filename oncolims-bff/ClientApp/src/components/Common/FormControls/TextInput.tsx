@@ -8,7 +8,7 @@ import classnames from 'classnames'
 
 interface TextInputProps {
   fieldName: string;
-  value: string;
+  defaultValue: string;
   errors: DeepMap<FieldValues, FieldError>;
   autocomplete?: "off" | "name" | "on" | "given-name" | "honorific-prefix" | undefined;
   register: UseFormRegister<FieldValues>;
@@ -18,7 +18,7 @@ interface TextInputProps {
 }
 
 
-function TextInput({fieldName, value, errors, autocomplete = undefined, register, onChange, type = "text", className}: TextInputProps) {
+function TextInput({fieldName, defaultValue, errors, autocomplete = undefined, register, onChange, type = "text", className}: TextInputProps) {
   let fieldKebab = voca.kebabCase(fieldName);
   return (
     <>
@@ -28,8 +28,7 @@ function TextInput({fieldName, value, errors, autocomplete = undefined, register
           {...register(fieldName)}
           id={fieldKebab}
           autoComplete={autocomplete}
-          onChange={onChange}
-          value={value}
+          defaultValue={defaultValue}
           className={classNames(
             "max-w-lg block w-full shadow-sm sm:max-w-xs sm:text-sm rounded-md", 
             {"focus:ring-emerald-500 focus:border-emerald-500 border-gray-300": !errors}, 

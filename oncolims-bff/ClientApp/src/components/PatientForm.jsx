@@ -38,21 +38,10 @@ function PatientForm({
     reset
   } = useForm({ resolver: yupResolver(patientSchema), mode: "onChange" });
 
-  const [values, setValues] = React.useState(initialValues)
-  const setValue = (field, value) =>
-    setValues((old) => ({ ...old, [field]: value }))
-
-  React.useLayoutEffect(() => {
-    // timeout to account for transition of modal
-    window.setTimeout(() => setValues(initialValues), 500)
-  }, [initialValues])
-
-  const internalHandleSubmit = async (e) => {
-    if (clearOnSubmit) {
-      setValues(defaultFormValues)
-    }
-    
-    await onSubmit(values)
+  // const simple = data => console.log(data);
+  const simple = async (data) => { 
+    console.log(data)   
+    await onSubmit({...initialValues, ...data})
     reset()
     window.setTimeout(() => resetMutation(), 1500)
   }
@@ -68,19 +57,18 @@ function PatientForm({
           </div>
 
           <form className="mt-6 sm:mt-5" 
-            onSubmit={handleSubmit(internalHandleSubmit)} 
-            onKeyDown={(e) => {if(e.key === "Enter") handleSubmit(internalHandleSubmit(e))}} 
+            onSubmit={handleSubmit(simple)} 
+            onKeyDown={(e) => {if(e.key === "Enter") handleSubmit(simple)}} 
           >
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <FormLabel text="First Name" fieldName="firstName" />
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <TextInput 
                   fieldName="firstName" 
-                  value={values.firstName} 
+                  defaultValue={initialValues.firstName} 
                   errors={errors.firstName} 
                   autocomplete="given-name" 
                   register={register} 
-                  onChange={(e) => setValue("firstName", e.target.value)}
                 />
               </div>
 
@@ -88,11 +76,10 @@ function PatientForm({
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <TextInput 
                   fieldName="lastName" 
-                  value={values.lastName} 
+                  defaultValue={initialValues.lastName} 
                   errors={errors.lastName} 
                   autocomplete="given-name" 
                   register={register} 
-                  onChange={(e) => setValue("lastName", e.target.value)}
                 />
               </div>
 
@@ -100,10 +87,9 @@ function PatientForm({
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <Listbox 
                   fieldName="sex" 
-                  value={values.sex} 
+                  value={initialValues.sex} 
                   errors={errors.sex} 
                   control={control} 
-                  onChange={(value) => setValue("sex", value)}
                   data={sexes}
                 />                
               </div>
@@ -113,7 +99,7 @@ function PatientForm({
         
       <div className="mt-5 sm:mt-6 space-y-2">
         <span className="flex w-full rounded-md shadow-sm">
-          <button onClick={handleSubmit(internalHandleSubmit)} type="submit" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-emerald-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+          <button onClick={handleSubmit(simple)} type="submit" className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-emerald-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
             {submitText}              
           </button>
         </span>

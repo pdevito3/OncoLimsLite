@@ -50,7 +50,7 @@ function Login() {
                 fieldName="username"
                 type="text"
                 errors={errors.username}
-                value={data.username}
+                defaultValue={data.username}
                 register={register}
                 onChange={(e) => setValue("username", e.target.value)}
                 />
@@ -63,7 +63,7 @@ function Login() {
                 fieldName="password"
                 type="password"
                 errors={errors.password}
-                value={data.password}
+                defaultValue={data.password}
                 register={register}
                 onChange={(e) => setValue("password", e.target.value)}
               />
