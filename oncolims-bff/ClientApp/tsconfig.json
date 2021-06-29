@@ -19,7 +19,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "baseUrl": "./src",
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
@@ -31,5 +30,8 @@
   "include": [
     "src"
   ],
-  "exclude": ["node_modules", "build"]
+  "exclude": [
+    "node_modules",
+    "build"
+  ]
 }
