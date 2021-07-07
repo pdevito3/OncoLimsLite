@@ -11,12 +11,15 @@ namespace Ordering.WebApi.Extensions.Services
     using System.IO;
     using System.Collections.Generic;
     using System.Reflection;
+    using Ordering.WebApi.Features.Patients.Services;
 
     public static class WebApiServiceExtension
     {
         public static void AddWebApiServices(this IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
+            services.AddTransient<IPatientLookup, PatientLookup>();
+
             services.AddMvc()
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<Startup>(); });
             services.AddAutoMapper(Assembly.GetExecutingAssembly());

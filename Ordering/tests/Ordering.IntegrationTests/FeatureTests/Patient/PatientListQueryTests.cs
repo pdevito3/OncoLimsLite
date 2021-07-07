@@ -13,7 +13,6 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
 
     public class PatientListQueryTests : TestBase
     {
-        
         [Test]
         public async Task PatientListQuery_Returns_Resource_With_Accurate_Props()
         {
@@ -31,7 +30,7 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             // Assert
             patients.Should().HaveCount(2);
         }
-        
+
         [Test]
         public async Task PatientListQuery_Returns_Expected_Page_Size_And_Number()
         {
@@ -50,7 +49,7 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             // Assert
             patients.Should().HaveCount(1);
         }
-        
+
         [Test]
         public async Task PatientListQuery_Throws_ApiException_When_Null_Query_Parameters()
         {
@@ -64,7 +63,7 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             // Assert
             act.Should().Throw<ApiException>();
         }
-        
+
         [Test]
         public async Task PatientListQuery_Returns_Sorted_Patient_ExternalId_List_In_Asc_Order()
         {
@@ -569,7 +568,6 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
                     options.ExcludingMissingMembers());
         }
 
-        
         [Test]
         public async Task PatientListQuery_Filters_Patient_PatientId()
         {
@@ -720,8 +718,8 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             //Arrange
             var fakePatientOne = new FakePatient { }.Generate();
             var fakePatientTwo = new FakePatient { }.Generate();
-            fakePatientOne.Sex = "alpha";
-            fakePatientTwo.Sex = "bravo";
+            fakePatientOne.Sex = "Female";
+            fakePatientTwo.Sex = "Male";
             var queryParameters = new PatientParametersDto() { Filters = $"Sex == {fakePatientTwo.Sex}" };
 
             await InsertAsync(fakePatientOne, fakePatientTwo);
@@ -809,6 +807,5 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
                 .Should().BeEquivalentTo(fakePatientTwo, options =>
                     options.ExcludingMissingMembers());
         }
-
     }
 }

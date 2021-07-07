@@ -13,6 +13,7 @@ namespace Ordering.WebApi.Features.Patients
     using System.Threading;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+    using Ordering.WebApi.Features.Patients.Services;
 
     public static class AddPatient
     {
@@ -37,21 +38,30 @@ namespace Ordering.WebApi.Features.Patients
         {
             private readonly OrderingDbContext _db;
             private readonly IMapper _mapper;
+            private readonly IPatientLookup _patientLookup;
 
-            public Handler(OrderingDbContext db, IMapper mapper)
+            public Handler(OrderingDbContext db, IMapper mapper, IPatientLookup patientLookup)
+            //public Handler(OrderingDbContext db, IMapper mapper)
             {
                 _mapper = mapper;
+                _patientLookup = patientLookup;
                 _db = db;
             }
 
             public async Task<PatientDto> Handle(AddPatientCommand request, CancellationToken cancellationToken)
             {
-                if (await _db.Patients.AnyAsync(p => p.PatientId == request.PatientToAdd.PatientId))
+                if (await _patientLookup.PatientIdExists(request.PatientToAdd.PatientId))
                 {
-                    throw new ConflictException("Patient already exists with this primary key.");
+                    throw new ConflictException("A patient already exists with this patient id.");
                 }
 
-                var patient = _mapper.Map<Patient> (request.PatientToAdd);
+                var patient = _mapper.Map<Patient>(request.PatientToAdd);
+
+                if (await _patientLookup.PatientNameDobExists(patient))
+                {
+                    throw new ConflictException("A patient already exists with this name and date of birth.");
+                }
+
                 _db.Patients.Add(patient);
                 var saveSuccessful = await _db.SaveChangesAsync() > 0;
 

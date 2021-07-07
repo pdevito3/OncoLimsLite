@@ -48,5 +48,25 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             // Assert
             act.Should().Throw<ConflictException>();
         }
+
+        [Test]
+        public async Task AddPatientCommand_Throws_Conflict_When_Patient_Name_Dob_Combo_Exists()
+        {
+            // Arrange
+            var FakePatient = new FakePatient { }.Generate();
+            var conflictRecord = new FakePatientForCreationDto { }.Generate();
+            conflictRecord.FirstName = FakePatient.FirstName;
+            conflictRecord.LastName = FakePatient.LastName;
+            conflictRecord.Dob = FakePatient.Dob;
+
+            await InsertAsync(FakePatient);
+
+            // Act
+            var command = new AddPatient.AddPatientCommand(conflictRecord);
+            Func<Task> act = () => SendAsync(command);
+
+            // Assert
+            act.Should().Throw<ConflictException>();
+        }
     }
 }
