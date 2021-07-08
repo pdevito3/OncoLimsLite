@@ -11,6 +11,9 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
     using System.Linq;
     using Ordering.WebApi.Features.Patients;
     using static TestFixture;
+    using System;
+    using Ordering.Core.Exceptions;
+    using System.Collections.Generic;
 
     public class UpdatePatientCommandTests : TestBase
     {
@@ -33,6 +36,48 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             // Assert
             updatedPatient.Should().BeEquivalentTo(updatedPatientDto, options =>
                 options.ExcludingMissingMembers());
+        }
+
+        [Test]
+        public async Task UpdatePatientCommand_Throws_Error_If_Patient_Exists()
+        {
+            // Arrange
+            var fakePatientOne = new FakePatient { }.Generate();
+            var fakePatientTwo = new FakePatient { }.Generate();
+            var updatedPatientDto = new FakePatientForUpdateDto { }.Generate();
+            await InsertAsync(fakePatientOne, fakePatientTwo);
+
+            var patient = await ExecuteDbContextAsync(db => db.Patients.FirstOrDefaultAsync());
+            var patientId = patient.PatientId;
+
+            updatedPatientDto.FirstName = fakePatientTwo.FirstName;
+            updatedPatientDto.LastName = fakePatientTwo.LastName;
+            updatedPatientDto.Dob = fakePatientTwo.Dob;
+
+            // Act
+            var command = new UpdatePatient.UpdatePatientCommand(patientId, updatedPatientDto);
+            Func<Task> act = () => SendAsync(command);
+
+            // Assert
+            act.Should().Throw<ConflictException>();
+        }
+
+        [Test]
+        public async Task UpdatePatientCommand_Throws_Error_If_Patient_Null()
+        {
+            // Arrange
+            var fakePatientOne = new FakePatient { }.Generate();
+            await InsertAsync(fakePatientOne);
+
+            var patient = await ExecuteDbContextAsync(db => db.Patients.FirstOrDefaultAsync());
+            var patientId = patient.PatientId;
+
+            // Act
+            var command = new UpdatePatient.UpdatePatientCommand(patientId, null);
+            Func<Task> act = () => SendAsync(command);
+
+            // Assert
+            act.Should().Throw<KeyNotFoundException>();
         }
     }
 }
