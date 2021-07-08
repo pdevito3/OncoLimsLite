@@ -1,14 +1,24 @@
 namespace Ordering.Core.Entities
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using Ordering.Core.Dtos.Patient;
+    using Ordering.Core.Exceptions;
+    using Ordering.Core.Interfaces.Patients;
     using Sieve.Attributes;
 
     [Table("Patient")]
     public class Patient
     {
         private string _sex;
+
+        // for EF Core
+        public Patient()
+        { }
 
         [Key]
         [Required]
@@ -69,5 +79,22 @@ namespace Ordering.Core.Entities
         public string Ethnicity { get; set; }
 
         // add-on property marker - Do Not Delete This Comment
+
+        public async Task<Patient> UpdatePatient(PatientForUpdateDto newPatientData, IMapper _mapper, IPatientLookup _patientLookup)
+        {
+            if (newPatientData == null)
+            {
+                // log error
+                throw new KeyNotFoundException();
+            }
+
+            var patient = _mapper.Map(newPatientData, this);
+            if (await _patientLookup.PatientNameDobExists(patient))
+            {
+                throw new ConflictException("A patient already exists with this name and date of birth.");
+            }
+
+            return patient;
+        }
     }
 }

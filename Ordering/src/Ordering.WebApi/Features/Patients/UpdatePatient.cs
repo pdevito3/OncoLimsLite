@@ -13,18 +13,19 @@ namespace Ordering.WebApi.Features.Patients
     using System.Threading;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+    using Ordering.Core.Interfaces.Patients;
 
     public static class UpdatePatient
     {
         public class UpdatePatientCommand : IRequest<bool>
         {
             public Guid PatientId { get; set; }
-            public PatientForUpdateDto PatientToUpdate { get; set; }
+            public PatientForUpdateDto NewPatientInfo { get; set; }
 
             public UpdatePatientCommand(Guid patient, PatientForUpdateDto patientToUpdate)
             {
                 PatientId = patient;
-                PatientToUpdate = patientToUpdate;
+                NewPatientInfo = patientToUpdate;
             }
         }
 
@@ -39,10 +40,12 @@ namespace Ordering.WebApi.Features.Patients
         {
             private readonly OrderingDbContext _db;
             private readonly IMapper _mapper;
+            private readonly IPatientLookup _patientLookup;
 
-            public Handler(OrderingDbContext db, IMapper mapper)
+            public Handler(OrderingDbContext db, IMapper mapper, IPatientLookup patientLookup)
             {
                 _mapper = mapper;
+                _patientLookup = patientLookup;
                 _db = db;
             }
 
@@ -53,13 +56,7 @@ namespace Ordering.WebApi.Features.Patients
                 var recordToUpdate = await _db.Patients
                     .FirstOrDefaultAsync(p => p.PatientId == request.PatientId);
 
-                if (recordToUpdate == null)
-                {
-                    // log error
-                    throw new KeyNotFoundException();
-                }
-
-                _mapper.Map(request.PatientToUpdate, recordToUpdate);
+                recordToUpdate = await recordToUpdate.UpdatePatient(request.NewPatientInfo, _mapper, _patientLookup);
 
                 if (_db.Entry(recordToUpdate).State != EntityState.Modified)
                     return true;

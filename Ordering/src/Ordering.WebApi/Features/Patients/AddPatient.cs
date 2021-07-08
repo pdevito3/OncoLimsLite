@@ -13,7 +13,7 @@ namespace Ordering.WebApi.Features.Patients
     using System.Threading;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using Ordering.WebApi.Features.Patients.Services;
+    using Ordering.Core.Interfaces.Patients;
 
     public static class AddPatient
     {
