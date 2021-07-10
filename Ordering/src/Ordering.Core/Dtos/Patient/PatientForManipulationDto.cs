@@ -4,10 +4,9 @@ namespace Ordering.Core.Dtos.Patient
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public abstract class PatientForManipulationDto 
+    public abstract class PatientForManipulationDto
     {
         public string ExternalId { get; set; }
-        public string InternalId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTimeOffset? Dob { get; set; }

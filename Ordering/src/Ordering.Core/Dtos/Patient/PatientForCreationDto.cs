@@ -6,8 +6,6 @@ namespace Ordering.Core.Dtos.Patient
 
     public class PatientForCreationDto : PatientForManipulationDto
     {
-        public Guid PatientId { get; set; } = Guid.NewGuid();
-
         // add-on property marker - Do Not Delete This Comment
     }
 }

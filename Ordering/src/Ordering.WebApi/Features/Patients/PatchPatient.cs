@@ -75,13 +75,7 @@ namespace Ordering.WebApi.Features.Patients
                 }
 
                 _mapper.Map(patientToPatch, patientToUpdate);
-                var saveSuccessful = await _db.SaveChangesAsync() > 0;
-
-                if (!saveSuccessful)
-                {
-                    // add log
-                    throw new Exception("Unable to save the requested changes. Please check the logs for more information.");
-                }
+                await _db.SaveChangesAsync();
 
                 return true;
             }

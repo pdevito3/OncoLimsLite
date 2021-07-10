@@ -121,62 +121,6 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
         }
 
         [Test]
-        public async Task PatientListQuery_Returns_Sorted_Patient_InternalId_List_In_Asc_Order()
-        {
-            //Arrange
-            var fakePatientOne = new FakePatient { }.Generate();
-            var fakePatientTwo = new FakePatient { }.Generate();
-            fakePatientOne.InternalId = "bravo";
-            fakePatientTwo.InternalId = "alpha";
-            var queryParameters = new PatientParametersDto() { SortOrder = "InternalId" };
-
-            await InsertAsync(fakePatientOne, fakePatientTwo);
-
-            //Act
-            var query = new GetPatientList.PatientListQuery(queryParameters);
-            var patients = await SendAsync(query);
-
-            // Assert
-            patients
-                .FirstOrDefault()
-                .Should().BeEquivalentTo(fakePatientTwo, options =>
-                    options.ExcludingMissingMembers());
-            patients
-                .Skip(1)
-                .FirstOrDefault()
-                .Should().BeEquivalentTo(fakePatientOne, options =>
-                    options.ExcludingMissingMembers());
-        }
-
-        [Test]
-        public async Task PatientListQuery_Returns_Sorted_Patient_InternalId_List_In_Desc_Order()
-        {
-            //Arrange
-            var fakePatientOne = new FakePatient { }.Generate();
-            var fakePatientTwo = new FakePatient { }.Generate();
-            fakePatientOne.InternalId = "bravo";
-            fakePatientTwo.InternalId = "alpha";
-            var queryParameters = new PatientParametersDto() { SortOrder = "InternalId" };
-
-            await InsertAsync(fakePatientOne, fakePatientTwo);
-
-            //Act
-            var query = new GetPatientList.PatientListQuery(queryParameters);
-            var patients = await SendAsync(query);
-
-            // Assert
-            patients
-                .FirstOrDefault()
-                .Should().BeEquivalentTo(fakePatientTwo, options =>
-                    options.ExcludingMissingMembers());
-            patients
-                .Skip(1)
-                .FirstOrDefault()
-                .Should().BeEquivalentTo(fakePatientOne, options =>
-                    options.ExcludingMissingMembers());
-        }
-
-        [Test]
         public async Task PatientListQuery_Returns_Sorted_Patient_FirstName_List_In_Asc_Order()
         {
             //Arrange
@@ -350,8 +294,8 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             //Arrange
             var fakePatientOne = new FakePatient { }.Generate();
             var fakePatientTwo = new FakePatient { }.Generate();
-            fakePatientOne.Sex = "bravo";
-            fakePatientTwo.Sex = "alpha";
+            fakePatientOne.Sex = "Male";
+            fakePatientTwo.Sex = "Female";
             var queryParameters = new PatientParametersDto() { SortOrder = "Sex" };
 
             await InsertAsync(fakePatientOne, fakePatientTwo);
@@ -601,30 +545,6 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
             fakePatientOne.ExternalId = "alpha";
             fakePatientTwo.ExternalId = "bravo";
             var queryParameters = new PatientParametersDto() { Filters = $"ExternalId == {fakePatientTwo.ExternalId}" };
-
-            await InsertAsync(fakePatientOne, fakePatientTwo);
-
-            //Act
-            var query = new GetPatientList.PatientListQuery(queryParameters);
-            var patients = await SendAsync(query);
-
-            // Assert
-            patients.Should().HaveCount(1);
-            patients
-                .FirstOrDefault()
-                .Should().BeEquivalentTo(fakePatientTwo, options =>
-                    options.ExcludingMissingMembers());
-        }
-
-        [Test]
-        public async Task PatientListQuery_Filters_Patient_InternalId()
-        {
-            //Arrange
-            var fakePatientOne = new FakePatient { }.Generate();
-            var fakePatientTwo = new FakePatient { }.Generate();
-            fakePatientOne.InternalId = "alpha";
-            fakePatientTwo.InternalId = "bravo";
-            var queryParameters = new PatientParametersDto() { Filters = $"InternalId == {fakePatientTwo.InternalId}" };
 
             await InsertAsync(fakePatientOne, fakePatientTwo);
 

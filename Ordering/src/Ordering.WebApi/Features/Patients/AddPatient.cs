@@ -13,7 +13,7 @@ namespace Ordering.WebApi.Features.Patients
     using System.Threading;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using Ordering.WebApi.Features.Patients.Services;
+    using Ordering.Core.Interfaces.Patients;
 
     public static class AddPatient
     {
@@ -39,23 +39,30 @@ namespace Ordering.WebApi.Features.Patients
             private readonly OrderingDbContext _db;
             private readonly IMapper _mapper;
             private readonly IPatientLookup _patientLookup;
+            private readonly IInternalIdGenerator _internalIdGenerator;
 
-            public Handler(OrderingDbContext db, IMapper mapper, IPatientLookup patientLookup)
+            public Handler(OrderingDbContext db, IMapper mapper, IPatientLookup patientLookup, IInternalIdGenerator internalIdGenerator)
             //public Handler(OrderingDbContext db, IMapper mapper)
             {
                 _mapper = mapper;
                 _patientLookup = patientLookup;
+                _internalIdGenerator = internalIdGenerator;
                 _db = db;
             }
 
             public async Task<PatientDto> Handle(AddPatientCommand request, CancellationToken cancellationToken)
             {
-                if (await _patientLookup.PatientIdExists(request.PatientToAdd.PatientId))
-                {
-                    throw new ConflictException("A patient already exists with this patient id.");
-                }
-
-                var patient = _mapper.Map<Patient>(request.PatientToAdd);
+                var patient = new Patient(
+                    request.PatientToAdd.FirstName,
+                    request.PatientToAdd.LastName,
+                    request.PatientToAdd.ExternalId,
+                    request.PatientToAdd.Dob,
+                    request.PatientToAdd.Gender,
+                    request.PatientToAdd.Sex,
+                    request.PatientToAdd.Race,
+                    request.PatientToAdd.Ethnicity,
+                    _internalIdGenerator
+                );
 
                 if (await _patientLookup.PatientNameDobExists(patient))
                 {

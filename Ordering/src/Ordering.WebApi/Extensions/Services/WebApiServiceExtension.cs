@@ -12,6 +12,7 @@ namespace Ordering.WebApi.Extensions.Services
     using System.Collections.Generic;
     using System.Reflection;
     using Ordering.WebApi.Features.Patients.Services;
+    using Ordering.Core.Interfaces.Patients;
 
     public static class WebApiServiceExtension
     {
@@ -19,6 +20,7 @@ namespace Ordering.WebApi.Extensions.Services
         {
             services.AddMediatR(typeof(Startup));
             services.AddTransient<IPatientLookup, PatientLookup>();
+            services.AddTransient<IInternalIdGenerator, InternalIdGenerator>();
 
             services.AddMvc()
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblyContaining<Startup>(); });

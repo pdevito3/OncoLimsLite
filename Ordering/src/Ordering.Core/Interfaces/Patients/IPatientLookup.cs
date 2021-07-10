@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.WebApi.Features.Patients.Services
+namespace Ordering.Core.Interfaces.Patients
 {
     public interface IPatientLookup
     {

@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Ordering.Core.Entities;
+    using Ordering.Core.Interfaces.Patients;
     using Ordering.Infrastructure.Contexts;
     using System;
     using System.Threading.Tasks;

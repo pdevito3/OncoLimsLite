@@ -10,6 +10,8 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
     using static TestFixture;
     using System;
     using Ordering.Core.Exceptions;
+    using Ordering.Core.Interfaces.Patients;
+    using NSubstitute;
 
     public class AddPatientCommandTests : TestBase
     {
@@ -32,34 +34,18 @@ namespace Ordering.IntegrationTests.FeatureTests.Patient
         }
 
         [Test]
-        public async Task AddPatientCommand_Throws_Conflict_When_PK_Guid_Exists()
-        {
-            // Arrange
-            var FakePatient = new FakePatient { }.Generate();
-            var conflictRecord = new FakePatientForCreationDto { }.Generate();
-            conflictRecord.PatientId = FakePatient.PatientId;
-
-            await InsertAsync(FakePatient);
-
-            // Act
-            var command = new AddPatient.AddPatientCommand(conflictRecord);
-            Func<Task> act = () => SendAsync(command);
-
-            // Assert
-            act.Should().Throw<ConflictException>();
-        }
-
-        [Test]
         public async Task AddPatientCommand_Throws_Conflict_When_Patient_Name_Dob_Combo_Exists()
         {
             // Arrange
-            var FakePatient = new FakePatient { }.Generate();
-            var conflictRecord = new FakePatientForCreationDto { }.Generate();
-            conflictRecord.FirstName = FakePatient.FirstName;
-            conflictRecord.LastName = FakePatient.LastName;
-            conflictRecord.Dob = FakePatient.Dob;
+            var patient = new FakePatient { }
+                .Generate();
 
-            await InsertAsync(FakePatient);
+            var conflictRecord = new FakePatientForCreationDto { }.Generate();
+            conflictRecord.FirstName = patient.FirstName;
+            conflictRecord.LastName = patient.LastName;
+            conflictRecord.Dob = patient.Dob;
+
+            await InsertAsync(patient);
 
             // Act
             var command = new AddPatient.AddPatientCommand(conflictRecord);

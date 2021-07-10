@@ -3,6 +3,7 @@ namespace Ordering.Core.Entities
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Ordering.Core.Interfaces.Patients;
     using Sieve.Attributes;
 
     [Table("Patient")]
@@ -18,8 +19,9 @@ namespace Ordering.Core.Entities
         [Sieve(CanFilter = true, CanSort = true)]
         public string ExternalId { get; set; }
 
+        //[Required]
         [Sieve(CanFilter = true, CanSort = true)]
-        public string InternalId { get; set; }
+        public string InternalId { get; private set; }
 
         [Sieve(CanFilter = true, CanSort = true)]
         public string FirstName { get; set; }
@@ -69,5 +71,31 @@ namespace Ordering.Core.Entities
         public string Ethnicity { get; set; }
 
         // add-on property marker - Do Not Delete This Comment
+
+        public Patient(string firstName,
+            string lastName,
+            string externalId,
+            DateTimeOffset? dob,
+            string gender,
+            string sex,
+            string race,
+            string ethnicity,
+            IInternalIdGenerator internalIdGenerator
+        )
+        {
+            PatientId = Guid.NewGuid();
+            FirstName = firstName;
+            LastName = lastName;
+            ExternalId = externalId;
+            Dob = dob;
+            Gender = gender;
+            Sex = sex;
+            Race = race;
+            Ethnicity = ethnicity;
+            InternalId = internalIdGenerator.NewInternalId();
+        }
+
+        // for EF
+        private Patient() { }
     }
 }
