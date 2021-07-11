@@ -34,23 +34,6 @@
                 | `_=`     | Starts with                   |  `!_=*`   | Case-insensitive string does not Starts with |
              </remarks>
         </member>
-        <member name="M:Ordering.WebApi.Controllers.v1.PatientsController.GetPatient(System.Guid)">
-            <summary>
-            Gets a single Patient by ID.
-            </summary>
-            <response code="200">Patient record returned successfully.</response>
-            <response code="400">Patient has missing/invalid values.</response>
-            <response code="500">There was an error on the server while creating the Patient.</response>
-        </member>
-        <member name="M:Ordering.WebApi.Controllers.v1.PatientsController.AddPatient(Ordering.Core.Dtos.Patient.PatientForCreationDto)">
-            <summary>
-            Creates a new Patient record.
-            </summary>
-            <response code="201">Patient created.</response>
-            <response code="400">Patient has missing/invalid values.</response>
-            <response code="409">A record already exists with this primary key.</response>
-            <response code="500">There was an error on the server while creating the Patient.</response>
-        </member>
         <member name="M:Ordering.WebApi.Controllers.v1.PatientsController.DeletePatient(System.Guid)">
             <summary>
             Deletes an existing Patient record.
@@ -72,6 +55,20 @@
             Updates specific properties on an existing Patient.
             </summary>
             <response code="204">Patient updated.</response>
+            <response code="400">Patient has missing/invalid values.</response>
+            <response code="500">There was an error on the server while creating the Patient.</response>
+        </member>
+        <member name="M:Ordering.WebApi.Features.Patients.PostPatientEndpoint.HandleAsync(Ordering.Core.Dtos.Patient.PatientForCreationDto,System.Threading.CancellationToken)">
+            <response code="201">Patient created.</response>
+            <response code="400">Patient has missing/invalid values.</response>
+            <response code="409">A record already exists with this primary key.</response>
+            <response code="500">There was an error on the server while creating the Patient.</response>
+        </member>
+        <member name="M:Ordering.WebApi.Features.Patients.GetPatientEndpoint.HandleAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Gets a single Patient by ID.
+            </summary>
+            <response code="200">Patient record returned successfully.</response>
             <response code="400">Patient has missing/invalid values.</response>
             <response code="500">There was an error on the server while creating the Patient.</response>
         </member>

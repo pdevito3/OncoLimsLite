@@ -16,7 +16,7 @@ namespace Ordering.WebApi.Controllers.v1
     [ApiController]
     [Route("api/Patients")]
     [ApiVersion("1.0")]
-    public class PatientsController: ControllerBase
+    public class PatientsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -24,7 +24,7 @@ namespace Ordering.WebApi.Controllers.v1
         {
             _mediator = mediator;
         }
-        
+
         /// <summary>
         /// Gets a list of all Patients.
         /// </summary>
@@ -84,54 +84,54 @@ namespace Ordering.WebApi.Controllers.v1
             var response = new Response<IEnumerable<PatientDto>>(queryResponse);
             return Ok(response);
         }
-        
-        /// <summary>
-        /// Gets a single Patient by ID.
-        /// </summary>
-        /// <response code="200">Patient record returned successfully.</response>
-        /// <response code="400">Patient has missing/invalid values.</response>
-        /// <response code="500">There was an error on the server while creating the Patient.</response>
-        [ProducesResponseType(typeof(Response<PatientDto>), 200)]
-        [ProducesResponseType(typeof(Response<>), 400)]
-        [ProducesResponseType(500)]
-        [Produces("application/json")]
-        [HttpGet("{patientId}", Name = "GetPatient")]
-        public async Task<ActionResult<PatientDto>> GetPatient(Guid patientId)
-        {
-            // add error handling
-            var query = new GetPatient.PatientQuery(patientId);
-            var queryResponse = await _mediator.Send(query);
 
-            var response = new Response<PatientDto>(queryResponse);
-            return Ok(response);
-        }
-        
-        /// <summary>
-        /// Creates a new Patient record.
-        /// </summary>
-        /// <response code="201">Patient created.</response>
-        /// <response code="400">Patient has missing/invalid values.</response>
-        /// <response code="409">A record already exists with this primary key.</response>
-        /// <response code="500">There was an error on the server while creating the Patient.</response>
-        [ProducesResponseType(typeof(Response<PatientDto>), 201)]
-        [ProducesResponseType(typeof(Response<>), 400)]
-        [ProducesResponseType(typeof(Response<>), 409)]
-        [ProducesResponseType(500)]
-        [Consumes("application/json")]
-        [Produces("application/json")]
-        [HttpPost]
-        public async Task<ActionResult<PatientDto>> AddPatient([FromBody]PatientForCreationDto patientForCreation)
-        {
-            // add error handling
-            var command = new AddPatient.AddPatientCommand(patientForCreation);
-            var commandResponse = await _mediator.Send(command);
-            var response = new Response<PatientDto>(commandResponse);
+        ///// <summary>
+        ///// Gets a single Patient by ID.
+        ///// </summary>
+        ///// <response code="200">Patient record returned successfully.</response>
+        ///// <response code="400">Patient has missing/invalid values.</response>
+        ///// <response code="500">There was an error on the server while creating the Patient.</response>
+        //[ProducesResponseType(typeof(Response<PatientDto>), 200)]
+        //[ProducesResponseType(typeof(Response<>), 400)]
+        //[ProducesResponseType(500)]
+        //[Produces("application/json")]
+        //[HttpGet("{patientId}", Name = "GetPatient")]
+        //public async Task<ActionResult<PatientDto>> GetPatient(Guid patientId)
+        //{
+        //    // add error handling
+        //    var query = new GetPatient.PatientQuery(patientId);
+        //    var queryResponse = await _mediator.Send(query);
 
-            return CreatedAtRoute("GetPatient",
-                new { commandResponse.PatientId },
-                response);
-        }
-        
+        //    var response = new Response<PatientDto>(queryResponse);
+        //    return Ok(response);
+        //}
+
+        ///// <summary>
+        ///// Creates a new Patient record.
+        ///// </summary>
+        ///// <response code="201">Patient created.</response>
+        ///// <response code="400">Patient has missing/invalid values.</response>
+        ///// <response code="409">A record already exists with this primary key.</response>
+        ///// <response code="500">There was an error on the server while creating the Patient.</response>
+        //[ProducesResponseType(typeof(Response<PatientDto>), 201)]
+        //[ProducesResponseType(typeof(Response<>), 400)]
+        //[ProducesResponseType(typeof(Response<>), 409)]
+        //[ProducesResponseType(500)]
+        //[Consumes("application/json")]
+        //[Produces("application/json")]
+        //[HttpPost]
+        //public async Task<ActionResult<PatientDto>> AddPatient([FromBody] PatientForCreationDto patientForCreation)
+        //{
+        //    // add error handling
+        //    var command = new AddPatient.AddPatientCommand(patientForCreation);
+        //    var commandResponse = await _mediator.Send(command);
+        //    var response = new Response<PatientDto>(commandResponse);
+
+        //    return CreatedAtRoute("GetPatient",
+        //        new { commandResponse.PatientId },
+        //        response);
+        //}
+
         /// <summary>
         /// Deletes an existing Patient record.
         /// </summary>
@@ -151,7 +151,7 @@ namespace Ordering.WebApi.Controllers.v1
 
             return NoContent();
         }
-        
+
         /// <summary>
         /// Updates an entire existing Patient.
         /// </summary>
@@ -171,7 +171,7 @@ namespace Ordering.WebApi.Controllers.v1
 
             return NoContent();
         }
-        
+
         /// <summary>
         /// Updates specific properties on an existing Patient.
         /// </summary>

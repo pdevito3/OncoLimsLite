@@ -38,7 +38,7 @@ namespace Ordering.IntegrationTests.TestUtilities
             // create a volume, if one doesn't already exist
             var volumeList = await dockerClient.Volumes.ListAsync();
             var volumeCount = volumeList.Volumes.Where(v => v.Name == DB_VOLUME_NAME).Count();
-            if(volumeCount <= 0)
+            if (volumeCount <= 0)
             {
                 await dockerClient.Volumes.CreateAsync(new VolumesCreateParameters
                 {
@@ -112,7 +112,7 @@ namespace Ordering.IntegrationTests.TestUtilities
                 .CreateClient();
         }
 
-        private static async Task CleanupRunningContainers(int hoursTillExpiration = -24)
+        private static async Task CleanupRunningContainers(int hoursTillExpiration = -48)
         {
             var dockerClient = GetDockerClient();
 
@@ -121,7 +121,7 @@ namespace Ordering.IntegrationTests.TestUtilities
 
             foreach (var runningContainer in runningContainers.Where(cont => cont.Names.Any(n => n.Contains(DB_CONTAINER_NAME))))
             {
-                // Stopping all test containers that are older than 24 hours
+                // Stopping all test containers that are older than 48 hours
                 var expiration = hoursTillExpiration > 0
                     ? hoursTillExpiration * -1
                     : hoursTillExpiration;
@@ -139,7 +139,7 @@ namespace Ordering.IntegrationTests.TestUtilities
             }
         }
 
-        private static async Task CleanupRunningVolumes(int hoursTillExpiration = -24)
+        private static async Task CleanupRunningVolumes(int hoursTillExpiration = -48)
         {
             var dockerClient = GetDockerClient();
 
@@ -147,7 +147,7 @@ namespace Ordering.IntegrationTests.TestUtilities
 
             foreach (var runningVolume in runningVolumes.Volumes.Where(v => v.Name == DB_VOLUME_NAME))
             {
-                // Stopping all test volumes that are older than 24 hours
+                // Stopping all test volumes that are older than 48 hours
                 var expiration = hoursTillExpiration > 0
                     ? hoursTillExpiration * -1
                     : hoursTillExpiration;

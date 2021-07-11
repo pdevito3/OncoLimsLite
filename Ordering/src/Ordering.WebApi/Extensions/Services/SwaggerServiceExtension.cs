@@ -33,6 +33,7 @@ namespace Ordering.WebApi.Extensions.Services
                         },
                     });
 
+                config.EnableAnnotations();
                 config.IncludeXmlComments(string.Format(@$"{AppDomain.CurrentDomain.BaseDirectory}{Path.DirectorySeparatorChar}Ordering.WebApi.xml"));
             });
         }
