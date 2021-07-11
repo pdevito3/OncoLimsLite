@@ -1,6 +1,7 @@
 namespace Ordering.Infrastructure.Seeders
 {
     using AutoBogus;
+    using AutoBogus.NSubstitute;
     using Ordering.Core.Entities;
     using Ordering.Infrastructure.Contexts;
     using System;
@@ -15,6 +16,7 @@ namespace Ordering.Infrastructure.Seeders
                 foreach (int value in Enumerable.Range(1, 10))
                 {
                     context.Patients.Add(new AutoFaker<Patient>()
+                        .Configure(c => { c.WithBinder<NSubstituteBinder>(); })
                         .RuleFor(fake => fake.Sex, fake => fake.Person.Gender.ToString())
                         .RuleFor(fake => fake.FirstName, fake => fake.Person.FirstName)
                         .RuleFor(fake => fake.LastName, fake => fake.Person.LastName)
